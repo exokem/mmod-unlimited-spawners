@@ -12,6 +12,6 @@ public class UnlimitedSpawners
 
     public UnlimitedSpawners()
     {
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        ModLoadingContext.get().getActiveContainer().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 }
