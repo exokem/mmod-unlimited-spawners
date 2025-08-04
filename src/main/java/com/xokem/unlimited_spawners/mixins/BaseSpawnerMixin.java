@@ -15,7 +15,7 @@ public class BaseSpawnerMixin
     @Unique
     private boolean unlimited_spawners$_isUnlimitedSpawningAllowed(Level level, BlockPos position)
     {
-        return Config.blocks.stream().anyMatch(block -> level.getBlockState(position.above()).is(block));
+        return Config.blocks.contains(level.getBlockState(position.above()).getBlock());
     }
 
     @Redirect(method = {"clientTick", "serverTick"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/BaseSpawner;isNearPlayer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)Z"), remap = false)
