@@ -9,6 +9,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(BaseSpawner.class)
 public interface BaseSpawnerAccessor
 {
-    @Invoker("isNearPlayer")
+    @Invoker(value = "isNearPlayer", remap = false)
     boolean callIsNearPlayer(Level level, BlockPos position);
 }

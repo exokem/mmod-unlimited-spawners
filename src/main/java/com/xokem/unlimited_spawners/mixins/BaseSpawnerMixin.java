@@ -18,7 +18,7 @@ public class BaseSpawnerMixin
         return Config.blocks.stream().anyMatch(block -> level.getBlockState(position.above()).is(block));
     }
 
-    @Redirect(method = {"clientTick", "serverTick"}, at = @At(value = "INVOKE", target ="Lnet/minecraft/world/level/BaseSpawner;isNearPlayer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)Z"))
+    @Redirect(method = {"clientTick", "serverTick"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/BaseSpawner;isNearPlayer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)Z"), remap = false)
     private boolean isNearPlayerProxy(BaseSpawner caller, Level level, BlockPos position)
     {
         return unlimited_spawners$_isUnlimitedSpawningAllowed(level, position) || ((BaseSpawnerAccessor)caller).callIsNearPlayer(level, position);
