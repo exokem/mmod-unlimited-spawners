@@ -19,7 +19,7 @@ public class Config
 
     private static final ModConfigSpec.ConfigValue<List<? extends String>> BLOCK_NAMES = BUILDER
             .comment("A list of blocks that enable unlimited spawning when placed on top of a spawner.")
-            .defineListAllowEmpty("blocks", List.of("minecraft:netherite_block"), Config::validateBlockName);
+            .define("blocks", List.of("minecraft:netherite_block"), Config::validateBlockName);
 
     static final ModConfigSpec SPEC = BUILDER.build();
 
@@ -27,7 +27,7 @@ public class Config
 
     private static boolean validateBlockName(final Object obj)
     {
-        return obj instanceof String itemName && BuiltInRegistries.BLOCK.containsKey(new ResourceLocation(itemName));
+        return obj instanceof String itemName && BuiltInRegistries.BLOCK.containsKey(ResourceLocation.tryParse(itemName));
     }
 
     @SubscribeEvent
@@ -35,7 +35,7 @@ public class Config
     {
         // convert the list of strings into a set of items
         blocks = BLOCK_NAMES.get().stream()
-                .map(itemName -> BuiltInRegistries.BLOCK.get(new ResourceLocation(itemName)))
+                .map(itemName -> BuiltInRegistries.BLOCK.get(ResourceLocation.tryParse(itemName)))
                 .collect(Collectors.toSet());
     }
 }
