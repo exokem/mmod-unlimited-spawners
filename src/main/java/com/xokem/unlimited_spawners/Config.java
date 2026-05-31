@@ -19,7 +19,7 @@ public class Config
 
     private static final ModConfigSpec.ConfigValue<List<? extends String>> BLOCK_NAMES = BUILDER
             .comment("A list of blocks that enable unlimited spawning when placed on top of a spawner.")
-            .define("blocks", List.of("minecraft:netherite_block"), Config::validateBlockName);
+            .defineList("blocks", List.of("minecraft:netherite_block"), Config::validateBlockName);
 
     static final ModConfigSpec SPEC = BUILDER.build();
 
